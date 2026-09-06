@@ -4,8 +4,10 @@ This project implements a simple Retrieval-Augmented Generation (RAG) system tha
 
 Document Input:
 The project takes a text file as the knowledge source. For example, sam_file_AI.txt contains information that can be queried by the user.
+
 Document Loading:
 The project uses LangChain's TextLoader to load the text document into the application.
+
 Text Splitting:
 The loaded document is divided into smaller chunks using RecursiveCharacterTextSplitter.
 
