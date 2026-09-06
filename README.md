@@ -2,32 +2,32 @@ RAG Question Answering using LangChain, FAISS, Sentence Transformers and Qwen
 
 This project implements a simple Retrieval-Augmented Generation (RAG) system that retrieves relevant information from a custom text document and uses the Qwen language model to generate answers.
 
-Document Input:
+1)Document Input:
 The project takes a text file as the knowledge source. For example, sam_file_AI.txt contains information that can be queried by the user.
 
-Document Loading:
+2)Document Loading:
 The project uses LangChain's TextLoader to load the text document into the application.
 
-Text Splitting:
+3)Text Splitting:
 The loaded document is divided into smaller chunks using RecursiveCharacterTextSplitter.
 
-The project uses:
+4)The project uses:
 
 chunk_size = 300
 
 chunk_overlap = 50
 
-Text Embeddings:
+5)Text Embeddings:
 
 Each document chunk is converted into a numerical vector using the Sentence Transformers model:
 
 sentence-transformers/all-MiniLM-L6-v2
 
-Vector Database:
+6)Vector Database:
 
 The generated embeddings are stored in a FAISS vector database. FAISS is used for efficient similarity search.
 
-User Question:
+7)User Question:
 
 The user provides a question related to the information available in the knowledge base.
 
@@ -35,18 +35,18 @@ For example:
 
 What is Vaithi's age?
 
-Similarity Search:
+8)Similarity Search:
 
 The user's question is converted into an embedding and compared with the stored document embeddings.
 Document Retrieval:
 
 FAISS retrieves the most relevant document chunks related to the user's question.
 
-Context Creation:
+9)Context Creation:
 
 The retrieved document chunks are combined to create the context that will be provided to the language model.
 
-Prompt Generation:
+10)Prompt Generation:
 
 A prompt is created containing the retrieved context and the user's question.
 
@@ -55,7 +55,7 @@ The model is instructed to use only the provided context:
 You are an AI assistant. Use ONLY the provided context to answer.
 If the answer is not in the context, say "I don't know".
 
-Large Language Model:
+11)Large Language Model:
 
 The project uses the Qwen instruction-tuned language model:
 
@@ -63,11 +63,11 @@ Qwen/Qwen2.5-1.5B-Instruct
 
 The model generates the final answer using the retrieved context.
 
-Answer Generation:
+12)Answer Generation:
 
 The generated response is returned to the user based on the information retrieved from the knowledge base.
 
-Context-Based Answering:
+13)Context-Based Answering:
 
 The system is designed to answer questions using the provided document context rather than relying only on the model's pretrained knowledge.
 
@@ -77,7 +77,7 @@ If the requested information is not available in the retrieved context, the mode
 
 I don't know
 
-Generated Output:
+14)Generated Output:
 
 For example, if sam_file_AI.txt contains:
 
@@ -93,7 +93,7 @@ The system can generate:
 
 Vaithi is 25 years old.
 
-Main Technologies:
+15)Main Technologies:
 
 Python – Core programming language
 
@@ -107,7 +107,7 @@ Hugging Face Transformers – Used to load and run the language model
 
 Qwen 2.5 – Instruction-tuned language model used for answer generation
 
-Models Used:
+16)Models Used:
 
 Embedding Model
 
@@ -124,47 +124,14 @@ Install the required Python packages:
 pip install langchain langchain-community langchain-text-splitters faiss-cpu sentence-transformers huggingface-hub transformers torch
 
 
-Place the knowledge file inside the data folder:
+17)overall process:
 
+Place the knowledge file inside the data folder:
 data/sam_file_AI.txt
 
-Then run:
+Enter a question in the prompt.eg:Ask a question: What is Vaithi's age?
 
+Then run:
 python rag_app.py
 
-Enter a question when prompted:
-
-Ask a question: What is Vaithi's age?
-
 The system retrieves the relevant information and generates the answer using Qwen.
-
-RAG Pipeline:
-
-Text Document
-
-      ↓
-      
-TextLoader
-
-      ↓
-      
-Text Splitting
-
-      ↓
-Sentence Transformer Embeddings
-
-      ↓
-      
-FAISS Vector Database
-      ↓
-User Question
-      ↓
-Similarity Search
-      ↓
-Relevant Context
-      ↓
-Prompt
-      ↓
-Qwen 2.5
-      ↓
-Generated Answer
